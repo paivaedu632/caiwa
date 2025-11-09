@@ -14,6 +14,7 @@
             overflow-x: hidden;
             line-height: 1.6;
         }
+        html { scroll-behavior: smooth; }
         /* Header Styles */
         .header {
             position: fixed;
@@ -96,7 +97,8 @@
         /* Hero Section */
         .hero {
             position: relative;
-            height: 100vh;
+            /* Reduce excessive whitespace and keep responsive sizing */
+            min-height: clamp(560px, 85vh, 920px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -104,6 +106,7 @@
             color: #333;
             text-align: center;
             padding-top: 80px; /* Account for fixed header */
+            padding-bottom: clamp(16px, 3vh, 32px);
         }
         .hero-wrapper {
             display: flex;
@@ -202,6 +205,12 @@
             position: relative;
             overflow: hidden;
         }
+        /* Anchor offset to account for fixed header when navigating */
+        .feature-section,
+        .reviews-section,
+        .free-courses-section,
+        .trust-metrics,
+        .footer { scroll-margin-top: 90px; }
         .reviews-title {
             font-size: 2rem;
             margin-bottom: 2rem;
@@ -676,6 +685,11 @@
             .mobile-toggle {
                 display: block;
             }
+            .hero {
+                min-height: clamp(480px, 70vh, 820px);
+                padding-top: 72px;
+                padding-bottom: clamp(12px, 2.5vh, 24px);
+            }
             .hero-wrapper {
                 flex-direction: column;
                 gap: 1rem;
@@ -1130,13 +1144,16 @@
                     alert(`${this.textContent} clicked! Taking you to the next step...`);
                 });
             });
-            // Parallax for hero
+            // Parallax: apply subtle movement to hero content, not the container
             window.addEventListener('scroll', function() {
                 const scrolled = window.pageYOffset;
-                const hero = document.querySelector('.hero');
-                const rate = scrolled * -0.3;
-                hero.style.transform = `translateY(${rate}px)`;
-                
+                const heroWrapper = document.querySelector('.hero-wrapper');
+                const rate = scrolled * -0.15;
+                const clamped = Math.max(rate, -30);
+                if (heroWrapper) {
+                    heroWrapper.style.transform = `translateY(${clamped}px)`;
+                }
+
                 // Header scroll effect
                 const header = document.querySelector('.header');
                 if (scrolled > 50) {
