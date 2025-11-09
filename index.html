@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migrant Success Canada - Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: background 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .header.scrolled {
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #dc3545;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .logo i {
+            margin-right: 0.5rem;
+            font-size: 1.75rem;
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+        .nav-menu li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 1rem;
+        }
+        .nav-menu li a:hover {
+            color: #dc3545;
+        }
+        .header-cta {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.25rem;
+            font-size: 0.95rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            font-family: inherit;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .header-cta:hover {
+            transform: scale(1.05);
+        }
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #333;
+            cursor: pointer;
+        }
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            color: #333;
+            text-align: center;
+            padding-top: 80px; /* Account for fixed header */
+        }
+        .hero-wrapper {
+            display: flex;
+            max-width: 1200px;
+            width: 100%;
+            padding: 0 20px;
+            gap: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+        .hero-text {
+            flex: 1;
+            text-align: left;
+            max-width: 500px;
+        }
+        .hero-image {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideIn 1s ease-out 0.5s forwards;
+            color: #333;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideIn 1s ease-out 0.8s forwards;
+            color: #666;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        .hero button {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideIn 1s ease-out 1.1s forwards;
+            font-family: inherit;
+            font-weight: 600;
+        }
+        .hero button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(220, 53, 69, 0.3);
+        }
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateX(30px);
+            animation: slideInRight 1s ease-out 1.4s forwards;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes slideInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        /* Reviews Section */
+        .reviews-section {
+            padding: 0 0 4rem 0; /* Zero top padding for seamless hero connection */
+            background: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .reviews-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #333;
+            font-weight: 700;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideIn 1s ease-out 0.2s forwards;
+        }
+        .reviews-carousel {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+        }
+        .reviews-track {
+            display: flex;
+            width: 200%; /* Duplicated for seamless loop */
+            animation: scroll 35s linear infinite; /* ~7s cycle */
+        }
+        .reviews-track:hover {
+            animation-play-state: paused;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .review-item {
+            flex: 0 0 20%; /* Each card 20% of track width (for 5 cards) */
+            display: flex;
+            flex-direction: column;
+            padding: 1.25rem; /* 20px */
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 0 0.5rem;
+            height: 260px; /* Consistent height */
+            text-align: left;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideIn 1s ease-out forwards;
+        }
+        .review-item:nth-child(1) { animation-delay: 0.4s; }
+        .review-item:nth-child(2) { animation-delay: 0.6s; }
+        .review-item:nth-child(3) { animation-delay: 0.8s; }
+        .review-item:nth-child(4) { animation-delay: 1s; }
+        .review-item:nth-child(5) { animation-delay: 1.2s; }
+        .review-item:nth-child(6) { animation-delay: 0.4s; }
+        .review-item:nth-child(7) { animation-delay: 0.6s; }
+        .review-item:nth-child(8) { animation-delay: 0.8s; }
+        .review-item:nth-child(9) { animation-delay: 1s; }
+        .review-item:nth-child(10) { animation-delay: 1.2s; }
+        .review-item:hover {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .review-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+            object-fit: cover;
+        }
+        .review-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+        .review-country {
+            font-size: 0.875rem;
+            color: #666;
+        }
+        .review-stars {
+            color: #dc3545;
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+        }
+        .review-quote {
+            font-style: italic;
+            font-size: 0.95rem;
+            color: #333;
+            margin-bottom: 0.75rem;
+            font-weight: 400;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            line-height: 1.4;
+        }
+        .review-subtext {
+            font-size: 0.875rem;
+            color: #999;
+            font-weight: 500;
+        }
+        /* Fade Mask */
+        .reviews-carousel::before,
+        .reviews-carousel::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 60px;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .reviews-carousel::before {
+            left: 0;
+            background: linear-gradient(to right, white 0%, transparent 100%);
+        }
+        .reviews-carousel::after {
+            right: 0;
+            background: linear-gradient(to left, white 0%, transparent 100%);
+        }
+        .reviews-cta {
+            margin-top: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideIn 1s ease-out 1.4s forwards;
+        }
+        .reviews-cta p {
+            font-size: 1.125rem;
+            color: #666;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        .reviews-cta button {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            font-family: inherit;
+            font-weight: 600;
+        }
+        .reviews-cta button:hover {
+            transform: scale(1.05);
+        }
+        /* Feature Sections */
+        .feature-section {
+            padding: 4rem 0;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .feature-wrapper {
+            display: flex;
+            max-width: 1200px;
+            width: 100%;
+            padding: 0 20px;
+            gap: 2rem;
+        }
+        .feature-text {
+            flex: 1;
+            text-align: left;
+            max-width: 500px;
+        }
+        .feature-image {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .feature-section:nth-child(even) .feature-wrapper {
+            flex-direction: row-reverse;
+        }
+        .feature-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+            font-weight: 700;
+            line-height: 1.2;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideIn 1s ease-out 0.3s forwards;
+        }
+        .feature-section p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: #666;
+            font-weight: 500;
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideIn 1s ease-out 0.6s forwards;
+        }
+        .feature-section button {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideIn 1s ease-out 0.9s forwards;
+            font-family: inherit;
+            font-weight: 600;
+        }
+        .feature-section button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(220, 53, 69, 0.3);
+        }
+        .feature-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateX(30px);
+            animation: slideInRight 1s ease-out 1.2s forwards;
+        }
+        .feature-section:nth-child(even) .feature-image img {
+            transform: translateX(-30px);
+            animation: slideInLeft 1s ease-out 1.2s forwards;
+        }
+        @keyframes slideInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        /* Free Courses Section */
+        .free-courses-section {
+            padding: 4rem 0;
+            background: white;
+            text-align: center;
+        }
+        .free-courses-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+            font-weight: 700;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideIn 1s ease-out 0.2s forwards;
+        }
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .course-item {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideIn 1s ease-out forwards;
+        }
+        .course-item:nth-child(1) { animation-delay: 0.4s; }
+        .course-item:nth-child(2) { animation-delay: 0.6s; }
+        .course-item:nth-child(3) { animation-delay: 0.8s; }
+        .course-item:nth-child(4) { animation-delay: 1s; }
+        .course-item:nth-child(5) { animation-delay: 1.2s; }
+        .course-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(220, 53, 69, 0.15);
+        }
+        .course-image {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .course-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+            color: #666;
+        }
+        .course-meta i {
+            margin-right: 0.25rem;
+            color: #dc3545;
+        }
+        .course-desc {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 1.25rem;
+            line-height: 1.5;
+        }
+        .course-cta {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            width: 100%;
+        }
+        .course-cta:hover {
+            transform: scale(1.02);
+        }
+        /* Trust & Impact Metrics Section */
+        .trust-metrics {
+            padding: 4rem 0;
+            background: white;
+            text-align: center;
+        }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .metric-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideIn 1s ease-out forwards;
+        }
+        .metric-item:nth-child(1) { animation-delay: 0.4s; }
+        .metric-item:nth-child(2) { animation-delay: 0.6s; }
+        .metric-item:nth-child(3) { animation-delay: 0.8s; }
+        .metric-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(220, 53, 69, 0.1);
+        }
+        .metric-icon {
+            font-size: 2rem;
+            color: #dc3545;
+            margin-bottom: 0.5rem;
+        }
+        .metric-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+        .metric-label {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+        /* Footer Styles */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .footer-section h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: #dc3545;
+            font-weight: 600;
+        }
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+        .footer-section ul li a:hover {
+            color: #dc3545;
+        }
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .footer-contact p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #ccc;
+        }
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .social-links a {
+            color: #ccc;
+            font-size: 1.25rem;
+            transition: color 0.3s ease;
+        }
+        .social-links a:hover {
+            color: #dc3545;
+        }
+        .footer-bottom {
+            border-top: 1px solid #555;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            text-align: center;
+            color: #999;
+            font-size: 0.875rem;
+        }
+        /* Responsive */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .review-item {
+                flex: 0 0 20%; /* Adjust for duplicated track */
+            }
+        }
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 15px;
+            }
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                gap: 1rem;
+            }
+            .nav-menu.active {
+                display: flex;
+            }
+            .mobile-toggle {
+                display: block;
+            }
+            .hero-wrapper {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .hero-text {
+                text-align: center;
+                max-width: none;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .hero button {
+                padding: 0.625rem 1.25rem;
+            }
+            .reviews-section {
+                padding: 0 0 3rem 0;
+            }
+            .reviews-title {
+                font-size: 1.75rem;
+            }
+            .reviews-track {
+                animation-duration: 40s;
+                width: 200%;
+            }
+            .review-item {
+                flex: 0 0 50%; /* 2 cards on mobile track */
+                padding: 1rem 16px;
+                margin: 0 0.25rem;
+                height: auto;
+                overflow: hidden; /* For swipe */
+            }
+            .reviews-carousel {
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+            }
+            .review-item {
+                scroll-snap-align: center;
+            }
+            .reviews-carousel::before,
+            .reviews-carousel::after {
+                width: 30px;
+            }
+            .courses-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .course-item {
+                padding: 1.25rem;
+            }
+            .course-image {
+                height: 100px;
+            }
+            .metrics-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .metric-number {
+                font-size: 1.75rem;
+            }
+            .metric-icon {
+                font-size: 1.75rem;
+            }
+            .feature-wrapper {
+                flex-direction: column !important;
+                gap: 1rem;
+                text-align: center;
+            }
+            .feature-section h2 {
+                font-size: 2rem;
+            }
+            .feature-section p {
+                font-size: 1rem;
+            }
+            .feature-image img {
+                transform: translateY(30px);
+                animation: slideIn 1s ease-out 1.2s forwards;
+            }
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 1.5rem;
+            }
+            .social-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-leaf"></i>
+                CAIWA
+            </a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#family">Family Support</a></li>
+                    <li><a href="#employment">Employment</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="header-cta">Get Started</button>
+            <button class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-wrapper">
+            <div class="hero-text">
+                <h1>We Help Migrants Succeed in Canada.</h1>
+                <p>Discover courses, family support, employment opportunities, and more.</p>
+                <button id="ctaButton">Get Started</button>
+            </div>
+            <div class="hero-image">
+                <img src="https://plus.unsplash.com/premium_photo-1665203485370-47457cfa067d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1470auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Diverse group of newcomers confidently engaging in community and work life">
+            </div>
+        </div>
+    </section>
+    <!-- Reviews Section -->
+    <section class="reviews-section">
+        <h2 class="reviews-title">What Migrant Families Are Saying</h2>
+        <div class="reviews-carousel">
+            <div class="reviews-track">
+                <div class="review-item">
+                    <div class="review-header">
+                        <img class="review-avatar" src="https://images.pexels.com/photos/33762212/pexels-photo-33762212.jpeg?auto=compress&cs=tinysrgb&w=48&h=48&fit=crop" alt="Ahmed Khalil">
+                        <div>
+                            <div class="review-name">Ahmed K.</div>
+                            <div class="review-country">Syria</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-quote">“The courses transformed my career overnight. I went from uncertainty to confidence in just months.”</div>
+                    <div class="review-subtext">Career Support Graduate</div>
+                </div>
+                <div class="review-item">
+                    <div class="review-header">
+                        <img class="review-avatar" src="https://images.pexels.com/photos/7626616/pexels-photo-7626616.jpeg?auto=compress&cs=tinysrgb&w=48&h=48&fit=crop" alt="Maria Santos">
+                        <div>
+                            <div class="review-name">Maria S.</div>
+                            <div class="review-country">Philippines</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-quote">“Family support made all the difference. We're finally settled and building memories here.”</div>
+                    <div class="review-subtext">Family Integration Program</div>
+                </div>
+                <div class="review-item">
+                    <div class="review-header">
+                        <img class="review-avatar" src="https://images.pexels.com/photos/1680172/pexels-photo-1680172.jpeg?auto=compress&cs=tinysrgb&w=48&h=48&fit=crop" alt="Raj Patel">
+                        <div>
+                            <div class="review-name">Raj P.</div>
+                            <div class="review-country">India</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-quote">“These programs were life-changing. I learned skills that employers actually value.”</div>
+                    <div class="review-subtext">Skills Training Alumni</div>
+                </div>
+                <div class="review-item">
+                    <div class="review-header">
+                        <img class="review-avatar" src="https://images.pexels.com/photos/32098265/pexels-photo-32098265.jpeg?auto=compress&cs=tinysrgb&w=48&h=48&fit=crop" alt="Elena Novak">
+                        <div>
+                            <div class="review-name">Elena N.</div>
+                            <div class="review-country">Ukraine</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-quote">“During our toughest times, their guidance kept us going. True compassion in action.”</div>
+                    <div class="review-subtext">Community Support Participant</div>
+                </div>
+                <div class="review-item">
+                    <div class="review-header">
+                        <img class="review-avatar" src="https://images.pexels.com/photos/4926674/pexels-photo-4926674.jpeg?auto=compress&cs=tinysrgb&w=48&h=48&fit=crop" alt="Carlos Rivera">
+                        <div>
+                            <div class="review-name">Carlos R.</div>
+                            <div class="review-country">Mexico</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-quote">“Landed my dream job through their network. Grateful for this new chapter.”</div>
+                    <div class="review-subtext">Employment Matching Success</div>
+                </div>
+                <!-- Duplicated for seamless loop -->
+                <div class="review-item">
+                    <div class="review-header">
+                        <img class="review-avatar" src="https://images.pexels.com/photos/33762212/pexels-photo-33762212.jpeg?auto=compress&cs=tinysrgb&w=48&h=48&fit=crop" alt="Ahmed Khalil">
+                        <div>
+                            <div class="review-name">Ahmed K.</div>
+                            <div class="review-country">Syria</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-quote">“The courses transformed my career overnight. I went from uncertainty to confidence in just months.”</div>
+                    <div class="review-subtext">Career Support Graduate</div>
+                </div>
+                <div class="review-item">
+                    <div class="review-header">
+                        <img class="review-avatar" src="https://images.pexels.com/photos/7626616/pexels-photo-7626616.jpeg?auto=compress&cs=tinysrgb&w=48&h=48&fit=crop" alt="Maria Santos">
+                        <div>
+                            <div class="review-name">Maria S.</div>
+                            <div class="review-country">Philippines</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-quote">“Family support made all the difference. We're finally settled and building memories here.”</div>
+                    <div class="review-subtext">Family Integration Program</div>
+                </div>
+                <div class="review-item">
+                    <div class="review-header">
+                        <img class="review-avatar" src="https://images.pexels.com/photos/1680172/pexels-photo-1680172.jpeg?auto=compress&cs=tinysrgb&w=48&h=48&fit=crop" alt="Raj Patel">
+                        <div>
+                            <div class="review-name">Raj P.</div>
+                            <div class="review-country">India</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-quote">“These programs were life-changing. I learned skills that employers actually value.”</div>
+                    <div class="review-subtext">Skills Training Alumni</div>
+                </div>
+                <div class="review-item">
+                    <div class="review-header">
+                        <img class="review-avatar" src="https://images.pexels.com/photos/32098265/pexels-photo-32098265.jpeg?auto=compress&cs=tinysrgb&w=48&h=48&fit=crop" alt="Elena Novak">
+                        <div>
+                            <div class="review-name">Elena N.</div>
+                            <div class="review-country">Ukraine</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-quote">“During our toughest times, their guidance kept us going. True compassion in action.”</div>
+                    <div class="review-subtext">Community Support Participant</div>
+                </div>
+                <div class="review-item">
+                    <div class="review-header">
+                        <img class="review-avatar" src="https://images.pexels.com/photos/4926674/pexels-photo-4926674.jpeg?auto=compress&cs=tinysrgb&w=48&h=48&fit=crop" alt="Carlos Rivera">
+                        <div>
+                            <div class="review-name">Carlos R.</div>
+                            <div class="review-country">Mexico</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-quote">“Landed my dream job through their network. Grateful for this new chapter.”</div>
+                    <div class="review-subtext">Employment Matching Success</div>
+                </div>
+            </div>
+        </div>
+        <div class="reviews-cta">
+            <p>Join thousands of newcomers who’ve already started their journey.</p>
+            <button class="cta-btn">Get Started</button>
+        </div>
+    </section>
+    <!-- Feature Section 1: Courses -->
+    <section class="feature-section" id="courses">
+        <div class="feature-wrapper">
+            <div class="feature-text">
+                <h2>Empower Your Skills with Expert Courses</h2>
+                <p>From language mastery to professional certification, our programs are designed to accelerate your integration and open doors to endless possibilities.</p>
+                <button class="cta-btn">Explore Courses</button>
+            </div>
+            <div class="feature-image">
+                <img src="https://images.pexels.com/photos/1595391/pexels-photo-1595391.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Diverse adults in a vibrant classroom, eagerly learning new skills">
+            </div>
+        </div>
+    </section>
+    <!-- Feature Section 2: Family Support -->
+    <section class="feature-section" id="family">
+        <div class="feature-wrapper">
+            <div class="feature-text">
+                <h2>Building Strong Foundations for Your Family</h2>
+                <p>Access counseling, childcare resources, and community events to help your loved ones thrive, connect, and feel at home in Canada.</p>
+                <button class="cta-btn">Get Family Support</button>
+            </div>
+            <div class="feature-image">
+                <img src="https://images.pexels.com/photos/3184309/pexels-photo-3184309.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Happy multicultural family embracing in a welcoming community setting">
+            </div>
+        </div>
+    </section>
+    <!-- Feature Section 3: Employment -->
+    <section class="feature-section" id="employment">
+        <div class="feature-wrapper">
+            <div class="feature-text">
+                <h2>Unlock Meaningful Career Opportunities</h2>
+                <p>Personalized job matching, resume workshops, and networking events tailored to your unique experience and dreams for a brighter future.</p>
+                <button class="cta-btn">Find Your Job</button>
+            </div>
+            <div class="feature-image">
+                <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Diverse professionals collaborating in a modern office, celebrating success">
+            </div>
+        </div>
+    </section>
+    <!-- Free Courses Section -->
+    <section class="free-courses-section">
+        <h2 class="free-courses-title">Start Your Journey with These 5 Free Courses</h2>
+        <div class="courses-grid">
+            <div class="course-item">
+                <img class="course-image" src="https://images.pexels.com/photos/1595391/pexels-photo-1595391.jpeg?auto=compress&cs=tinysrgb&w=250&h=120&fit=crop" alt="English class in session">
+                <div class="course-title">English for Beginners</div>
+                <div class="course-meta">
+                    <span><i class="fas fa-users"></i> 1,200 enrolled</span>
+                    <span><i class="fas fa-star"></i> 4.8 (150 reviews)</span>
+                </div>
+                <div class="course-desc">Build foundational language skills to communicate confidently in everyday life and work.</div>
+                <button class="course-cta">Enroll Now</button>
+            </div>
+            <div class="course-item">
+                <img class="course-image" src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=250&h=120&fit=crop" alt="Job search workshop">
+                <div class="course-title">Canadian Job Search Basics</div>
+                <div class="course-meta">
+                    <span><i class="fas fa-users"></i> 950 enrolled</span>
+                    <span><i class="fas fa-star"></i> 4.7 (120 reviews)</span>
+                </div>
+                <div class="course-desc">Learn proven strategies for finding employment, from resumes to interviews.</div>
+                <button class="course-cta">Enroll Now</button>
+            </div>
+            <div class="course-item">
+                <img class="course-image" src="https://images.pexels.com/photos/3184309/pexels-photo-3184309.jpeg?auto=compress&cs=tinysrgb&w=250&h=120&fit=crop" alt="Family settling in community">
+                <div class="course-title">Family Settlement Guide</div>
+                <div class="course-meta">
+                    <span><i class="fas fa-users"></i> 800 enrolled</span>
+                    <span><i class="fas fa-star"></i> 4.9 (200 reviews)</span>
+                </div>
+                <div class="course-desc">Navigate housing, schools, and services to help your family feel at home.</div>
+                <button class="course-cta">Enroll Now</button>
+            </div>
+            <div class="course-item">
+                <img class="course-image" src="https://images.pexels.com/photos/247851/pexels-photo-247851.jpeg?auto=compress&cs=tinysrgb&w=250&h=120&fit=crop" alt="Cultural integration event">
+                <div class="course-title">Cultural Integration 101</div>
+                <div class="course-meta">
+                    <span><i class="fas fa-users"></i> 1,100 enrolled</span>
+                    <span><i class="fas fa-star"></i> 4.6 (90 reviews)</span>
+                </div>
+                <div class="course-desc">Understand Canadian customs and build connections in your new community.</div>
+                <button class="course-cta">Enroll Now</button>
+            </div>
+            <div class="course-item">
+                <img class="course-image" src="https://images.pexels.com/photos/3762671/pexels-photo-3762671.jpeg?auto=compress&cs=tinysrgb&w=250&h=120&fit=crop" alt="Resume building session">
+                <div class="course-title">Resume Building Workshop</div>
+                <div class="course-meta">
+                    <span><i class="fas fa-users"></i> 1,500 enrolled</span>
+                    <span><i class="fas fa-star"></i> 4.8 (180 reviews)</span>
+                </div>
+                <div class="course-desc">Craft a standout resume that highlights your global experience for Canadian employers.</div>
+                <button class="course-cta">Enroll Now</button>
+            </div>
+        </div>
+    </section>
+    <!-- Trust & Impact Metrics Section -->
+    <section class="trust-metrics">
+        <div class="metrics-grid">
+            <div class="metric-item">
+                <div class="metric-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="metric-number">16,865</div>
+                <div class="metric-label">Families Empowered</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="metric-number">48+</div>
+                <div class="metric-label">Pathways to Growth</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-icon">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <div class="metric-number">80,000+</div>
+                <div class="metric-label">Voices Heard</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="metric-number">85</div>
+                <div class="metric-label">Hearts in Service</div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Migrant Success Canada is dedicated to empowering newcomers with the tools, support, and opportunities they need to thrive in their new home.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#family">Family Support</a></li>
+                    <li><a href="#employment">Employment</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <div class="footer-contact">
+                    <p><i class="fas fa-envelope"></i> info@migrantsuccess.ca</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Toronto, ON, Canada</p>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Migrant Success Canada. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+    <script>
+        // JavaScript for interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    alert(`${this.textContent} clicked! Taking you to the next step...`);
+                });
+            });
+            // Parallax for hero
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const hero = document.querySelector('.hero');
+                const rate = scrolled * -0.3;
+                hero.style.transform = `translateY(${rate}px)`;
+                
+                // Header scroll effect
+                const header = document.querySelector('.header');
+                if (scrolled > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            // Mobile menu toggle
+            const mobileToggle = document.getElementById('mobileToggle');
+            const navMenu = document.querySelector('.nav-menu');
+            mobileToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+            // Touch pause for carousel
+            const track = document.querySelector('.reviews-track');
+            let isTouching = false;
+            track.addEventListener('touchstart', () => { isTouching = true; track.style.animationPlayState = 'paused'; });
+            track.addEventListener('touchend', () => { setTimeout(() => { if (!isTouching) track.style.animationPlayState = 'running'; }, 100); });
+        });
+    </script>
+</body>
+</html>
